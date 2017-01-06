@@ -5,16 +5,16 @@ A floating text effect UI component for Phaser.io Javascript library
 <h3>Run the floating text effect from anywhere</h3>
 ```
 new FloatingText(this, {
-            text: "Hello Phaser!",
-            animation: "explode",
-            textOptions: {
-                fontSize: 32,
-                fill: "#ff18aa"
-            },
-            x: 100,
-            y: 100,
-            timeToLive: 400 // ms
-        })
+    text: "Hello Phaser!",
+    animation: "explode",
+    textOptions: {
+        fontSize: 32,
+        fill: "#ff18aa"
+    },
+    x: 100,
+    y: 100,
+    timeToLive: 400 // ms
+});
 ```
 pass necesery options like: this or game (the state that the floating text will be created within), and the customization options
 
