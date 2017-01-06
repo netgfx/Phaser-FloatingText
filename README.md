@@ -20,7 +20,7 @@ pass necesery options like: this or game (the state that the floating text will 
 
 <hr>
 
-<img src="http://i221.photobucket.com/albums/dd22/djmid71/phasetips_zpsjtzerwxx.gif"/>
+<img src="http://i221.photobucket.com/albums/dd22/djmid71/ezgif.com-3ca0540923_zpsjqrkmldq.gif"/>
 
 <strong>View example: <a href="http://www.netgfx.com/trunk/games/tools/phaser-floatingtext">Complete example</a></strong>
 
