@@ -39,7 +39,6 @@ The game state that we want the floating text to appear to, such as "game"
     <li><strong>y</strong> The y position of the floating text (default: auto based on alignment)</li>
     <li><strong>parentObject</strong> The parent object that the floating text will appear at (default: null)</li>
     <li><strong>animation: </strong> The animation effect (default: up, options:explode, smoke, custom, directional: up, down, left, right, fade, physics)</li>
-    <li><strong>backgroundColor: </strong> The color of the background (default: 0x000000)</li>
     <li><strong>textStyle: </strong> Declares styles for the simple text element (default: {
             fontSize: 12,
             fill: "#ffffff",
@@ -49,6 +48,19 @@ The game state that we want the floating text to appear to, such as "game"
             wordWrapWidth: 200
         }</li>
     <li><strong>fixedToCamera: </strong> Pins the floating text on the camera and moves with it (x,y are now camera offset) (default: false)</li>
+    <li><strong>sprite</strong> Add a Sprite instead of a text to float (default: null)</li>
+    <li><strong>spriteAnimationName</strong> If using an animation on the sprite, the name of the animation (default:"")</li>
+    <li><strong>spriteAnimationFrames</strong> If using an animation on the sprite, the animation frames (default:[])</li>
+    <li><strong>spriteAnimationFrameRate</strong> If using an animation on the sprite, the animation frame rate (default: 24)</li>
+    <li><strong>spriteAnimationRepeat</strong> If using an animation on the sprite, if the animation should loop (default: true)</li>
+    <li><strong>spriteAnchor</strong> The anchor to use on the sprite</li>
+    <li><strong>hasBackground</strong> A rounded rectangle behind the text (note: doesn't play well with explode)</li>
+    <li><strong>backgroundColor: </strong> The color of the rounded rectangle background (default: 0x000000)</li>
+    <li><strong>distance</strong> The distance for the floating item to move (default: 40)</li>
+    <li><strong>easing</strong> The easing function to use for animation (default: Phaser.Easing.Quintic.Out)</li>
+    <li><strong>timeToLive</strong> How much time (in ms) for the floating item to disapear (default: 600)</li>
+    <li><strong>customPath</strong> The custom path to use with bezier tweening, should be in the form of [{x:10, y:10},{x:20,y:20}] (default: [])</li>
+    <li><strong>align</strong> Where to align the floating item, options: "left, right, center" (default: "center")</li>
 </ul>
 
 ### Documentation is incomplete.

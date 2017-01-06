@@ -94,9 +94,15 @@ GameState.prototype.create = function() {
         var dmg = _game.rnd.integerInRange(100, 1000);
         var timeToLive = 200;
         var effect = masterEffect;
+        var bg = false;
+        var bgColor = 0xfec72a;
         if (dmg > 800) {
             effect = masterEffect === "smoke" ? "explode" : "smoke";
             timeToLive = 600;
+        }
+
+        if(masterEffect === "physics") {
+            bg = true;
         }
 
         new FloatingText(this, {
@@ -115,8 +121,8 @@ GameState.prototype.create = function() {
                 wordWrapWidth: 200,
                 font: "Luckiest Guy"
             },
-            hasBackground: true,
-            backgroundColor: 0x000000,
+            hasBackground: bg,
+            backgroundColor: bgColor,
             x: char.x + char.width / 2,
             y: char.y - 20,
             timeToLive: timeToLive

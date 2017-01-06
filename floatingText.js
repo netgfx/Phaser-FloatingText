@@ -96,13 +96,15 @@ var FloatingText = function(state, options) {
             }
         }
 
+        var modal;
         if (_hasBackground === true) {
-            var modal = state.add.graphics(_obj.width + 5, _obj.height + 5);
+            modal = state.add.graphics(_obj.width + 10, _obj.height);
             modal.beginFill(_backgroundColor, 1);
-            modal.x = _obj.x - 5;
-            modal.y = _obj.y - 5;
-            floatingTextGroup.width = modal.width;
-            floatingTextGroup.height = modal.height;
+            //modal.x = _obj.x - 5;
+            //modal.y = _obj.y - 5;
+            floatingTextGroup.width = _obj.width+5;
+            floatingTextGroup.height = _obj.width+5;
+            modal.drawRoundedRect(0, 0, _obj.width+10, _obj.height, 6);
             modal.endFill();
             floatingTextGroup.add(modal);
         } else {
@@ -118,6 +120,10 @@ var FloatingText = function(state, options) {
         floatingTextGroup.y = _obj.y;
         _obj.x = 0;
         _obj.y = 0;
+        if(modal !== undefined) {
+            modal.x = -5;
+            modal.y = 0;
+        }
         _obj._animation = _animation;
         _obj._easing = _easing;
         _obj._timeToLive = _timeToLive;
