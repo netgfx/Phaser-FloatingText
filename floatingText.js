@@ -389,10 +389,10 @@ var FloatingText = function(state, options) {
     // TODO: add factory
 
     return {
-        showFloatingText() {
+        showFloatingText: function() {
             floatingTextGroup.visible = true;
         },
-        hideFloatingText() {
+        hideFloatingText: function() {
             floatingTextGroup.visible = false;
         }
 
