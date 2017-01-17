@@ -36,6 +36,7 @@ The game state that we want the floating text to appear to, such as "game"
     <li><strong>width:</strong> The width of the floating text (default: auto)</li>
   <li><strong>height:</strong> The height of the floating text (default: auto)</li>
   <li><strong>x</strong> The x position of the floating text (default: auto based on alignment)</li>
+  <li><strong>rotation</strong> The amount of degrees to rotate the floating item (default: 0)</li>
     <li><strong>y</strong> The y position of the floating text (default: auto based on alignment)</li>
     <li><strong>parentObject</strong> The parent object that the floating text will appear at (default: null)</li>
     <li><strong>animation: </strong> The animation effect (default: up, options:explode, smoke, custom, directional: up, down, left, right, fade, physics)</li>

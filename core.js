@@ -4,6 +4,27 @@ var reg = {};
 var GameState = function(game) {};
 var slider;
 var coins;
+var battleHowls = [
+"PAM!",
+"BAM!",
+"BANG!",
+"BIFF!",
+"BLOOP!",
+"BONK!",
+"CLASH!",
+"CRASH!",
+"KAPOW!",
+"OOOFF!",
+"POW!",
+"WHACK!",
+"WHAMM!",
+"ZAM!",
+"ZLOPP!",
+"ZZWAP!",
+"WHAP!",
+"UGGH!",
+"THWACK!"
+];
 // Load images and sounds
 GameState.prototype.preload = function() {
     this.load.image('bg', "http://i221.photobucket.com/albums/dd22/djmid71/bg1_zpsxrhh1f86.jpg");
@@ -99,12 +120,17 @@ GameState.prototype.create = function() {
         if (dmg > 800) {
             effect = masterEffect === "smoke" ? "explode" : "smoke";
             timeToLive = 600;
+            dmg = Phaser.ArrayUtils.getRandomItem(battleHowls);
         }
 
         if(masterEffect === "physics") {
             bg = true;
         }
 
+        var rand = _game.rnd.integerInRange(0,1);
+        var val = char.x + (char.width * rand);
+        var targetX = val;
+        
         new FloatingText(this, {
             text: dmg,
             // sprite: coins,
@@ -121,6 +147,8 @@ GameState.prototype.create = function() {
                 wordWrapWidth: 200,
                 font: "Luckiest Guy"
             },
+            //spriteAnchor: 0.5,
+            //rotation: 15,
             hasBackground: bg,
             backgroundColor: bgColor,
             x: char.x + char.width / 2,

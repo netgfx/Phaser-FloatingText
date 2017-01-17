@@ -33,6 +33,7 @@ var FloatingText = function(state, options) {
         var _spriteAnchor = options.spriteAnchor || 0.5;
         var _x = options.x || "auto";
         var _y = options.y || "auto";
+        var _rotation = options.rotation || false;
         var _parentObj = options.parentObj || null;
         var _width = options.width || "auto";
         var _height = options.height || "auto";
@@ -49,10 +50,15 @@ var FloatingText = function(state, options) {
         // create the element
         if (_sprite === null) {
             _obj = state.add.text(0, 0, _text, _textOptions);
+            //_obj.anchor.setTo(_spriteAnchor);
         } else {
             _obj = state.add.sprite(_sprite.x, _sprite.y, _sprite.key, _spriteAnimationFrames[0]);
             _obj.anchor.setTo(_spriteAnchor);
             _obj.animations.add(_spriteAnimationName, _spriteAnimationFrames, _spriteAnimationFrameRate, _spriteAnimationRepeat, true);
+        }
+
+        if (_rotation !== false) {
+            _obj.angle = _rotation;
         }
 
         if (_parentObj !== null && _parentObj !== undefined) {
