@@ -3,7 +3,8 @@
 A floating text effect UI component for Phaser.io Javascript library
 
 <h3>Run the floating text effect from anywhere</h3>
-```
+
+```javascript
 new FloatingText(this, {
     text: "Hello Phaser!",
     animation: "explode",
