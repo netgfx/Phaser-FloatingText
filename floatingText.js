@@ -42,7 +42,7 @@ var FloatingText = function(state, options) {
         var _animation = options.animation || "explode"; // explode, smoke, custom, directional: up, down, left, right, fade, physics
         var _distance = options.distance || 40;
         var _easing = options.easing || Phaser.Easing.Quintic.Out;
-        var _timeToLive = options.timeToLive || 600 // in ms
+        var _timeToLive = options.timeToLive || 600; // in ms
         var _fixedToCamera = options.fixedToCamera || false;
         var _align = options.align || "center";
         var _customPath = options.customPath || [];
@@ -108,9 +108,9 @@ var FloatingText = function(state, options) {
             modal.beginFill(_backgroundColor, 1);
             //modal.x = _obj.x - 5;
             //modal.y = _obj.y - 5;
-            floatingTextGroup.width = _obj.width+5;
-            floatingTextGroup.height = _obj.width+5;
-            modal.drawRoundedRect(0, 0, _obj.width+10, _obj.height, 6);
+            floatingTextGroup.width = _obj.width + 5;
+            floatingTextGroup.height = _obj.width + 5;
+            modal.drawRoundedRect(0, 0, _obj.width + 10, _obj.height, 6);
             modal.endFill();
             floatingTextGroup.add(modal);
         } else {
@@ -126,7 +126,7 @@ var FloatingText = function(state, options) {
         floatingTextGroup.y = _obj.y;
         _obj.x = 0;
         _obj.y = 0;
-        if(modal !== undefined) {
+        if (modal !== undefined) {
             modal.x = -5;
             modal.y = 0;
         }
@@ -140,42 +140,54 @@ var FloatingText = function(state, options) {
         floatingTextGroup.add(_obj);
         floatingTextGroup.visible = false;
 
-        if(store !== true) {
-        	animateFloatingText();
-    	}
-    	else {
-    		return floatingTextGroup;
-    	}
+        if (store !== true) {
+            animateFloatingText();
+        } else {
+            return floatingTextGroup;
+        }
     }
 
     function animateFloatingText() {
 
         var type = _obj._animation;
+        var tweenObj;
+        var pointsX = [];
+        var pointsY = [];
+        var startX;
+        var startY;
+        var side;
         floatingTextGroup.visible = true;
         if (_obj._sprite !== null) {
             _obj.animations.play(_obj._spriteAnimationName);
         }
 
         if (type === "physics") {
-            var startX = floatingTextGroup.x;
-            var startY = floatingTextGroup.y
-            var side = state.rnd.integerInRange(0, 10);
+            startX = floatingTextGroup.x;
+            startY = floatingTextGroup.y;
+            side = state.rnd.integerInRange(0, 10);
+            var firstBezierPointX;
+            var firstBezierPointY;
+            var secondBezierPointX;
+            var secondBezierPointY;
+            var endX;
+            var endY;
+
             if (side > 5) {
-                var firstBezierPointX = floatingTextGroup.x + 25;
-                var firstBezierPointY = floatingTextGroup.y - 50;
-                var secondBezierPointX = floatingTextGroup.x + 50;
-                var secondBezierPointY = floatingTextGroup.y - 25;
-                var endX = floatingTextGroup.x + 100;
-                var endY = floatingTextGroup.y + 50;
+                firstBezierPointX = floatingTextGroup.x + 25;
+                firstBezierPointY = floatingTextGroup.y - 50;
+                secondBezierPointX = floatingTextGroup.x + 50;
+                secondBezierPointY = floatingTextGroup.y - 25;
+                endX = floatingTextGroup.x + 100;
+                endY = floatingTextGroup.y + 50;
             } else {
-                var firstBezierPointX = floatingTextGroup.x - 25;
-                var firstBezierPointY = floatingTextGroup.y - 50;
-                var secondBezierPointX = floatingTextGroup.x - 50;
-                var secondBezierPointY = floatingTextGroup.y - 25;
-                var endX = floatingTextGroup.x - 100;
-                var endY = floatingTextGroup.y + 50;
+                firstBezierPointX = floatingTextGroup.x - 25;
+                firstBezierPointY = floatingTextGroup.y - 50;
+                secondBezierPointX = floatingTextGroup.x - 50;
+                secondBezierPointY = floatingTextGroup.y - 25;
+                endX = floatingTextGroup.x - 100;
+                endY = floatingTextGroup.y + 50;
             }
-            var tweenObj = state.add.tween(floatingTextGroup).to({
+            tweenObj = state.add.tween(floatingTextGroup).to({
                 x: [startX, firstBezierPointX, secondBezierPointX, endX],
                 y: [startY, firstBezierPointY, secondBezierPointY, endY],
             }, _obj.timeToLive, Phaser.Easing.Circular.Out, true).interpolation(function(v, k) {
@@ -193,14 +205,14 @@ var FloatingText = function(state, options) {
             }, floatingTextGroup);
 
         } else if (type === "custom") {
-            var pointsX = [];
-            var pointsY = [];
+            pointsX = [];
+            pointsY = [];
             for (var i = 0; i < _obj._customPath.length; i++) {
                 pointsX.push(_obj._customPath[i].x);
                 pointsX.push(_obj._customPath[i].y);
             }
 
-            var tweenObj = state.add.tween(floatingTextGroup).to({
+            tweenObj = state.add.tween(floatingTextGroup).to({
                 x: pointsX,
                 y: pointsY,
             }, _obj.timeToLive, Phaser.Easing.Circular.Out, true).interpolation(function(v, k) {
@@ -220,7 +232,7 @@ var FloatingText = function(state, options) {
             floatingTextGroup.pivot.setTo(0.5, 0.5);
 
             var textObj = floatingTextGroup.children[floatingTextGroup.children.length - 1];
-            var tweenObj = tweenProperty(textObj, "size", { fontSize: textObj.fontSize * 2 }, 250, 0, Phaser.Easing.Back.Out);
+            tweenObj = tweenProperty(textObj, "size", { fontSize: textObj.fontSize * 2 }, 250, 0, Phaser.Easing.Back.Out);
 
             var scaleX = textObj.width * 2 - textObj.width;
             var scaleY = textObj.height * 2 - textObj.height;
@@ -237,35 +249,34 @@ var FloatingText = function(state, options) {
                 }, this);
             }, floatingTextGroup);
         } else if (type === "smoke") {
-            var startX = floatingTextGroup.x;
-            var startY = floatingTextGroup.y
-            var side = state.rnd.integerInRange(0, 10);
-            var pointsX = [];
-            var pointsY = [];
+            startX = floatingTextGroup.x;
+            startY = floatingTextGroup.y;
+            side = state.rnd.integerInRange(0, 10);
+
             var pivot = 0;
-            for (var i = 0; i < 12; i++) {
+            for (var j = 0; j < 12; j++) {
                 if (pivot < 3 && pivot > 0) {
                     pointsX.push(startX + (10 * Math.abs(pivot)));
-                    pointsY.push(startY - (_obj._distance / 12 * i));
+                    pointsY.push(startY - (_obj._distance / 12 * j));
                     pivot += 1;
                 } else if (pivot === 3) {
                     pivot = 0;
                     pointsX.push(startX - (10 * Math.abs(pivot)));
-                    pointsY.push(startY - (_obj._distance / 12 * i));
+                    pointsY.push(startY - (_obj._distance / 12 * j));
                     pivot -= 1;
                 } else if (pivot === -3) {
                     pivot = 0;
                     pointsX.push(startX - (10 * Math.abs(pivot)));
-                    pointsY.push(startY - (_obj._distance / 12 * i));
+                    pointsY.push(startY - (_obj._distance / 12 * j));
                     pivot += 1;
                 } else if (pivot > -3) {
                     pointsX.push(startX - (10 * Math.abs(pivot)));
-                    pointsY.push(startY - (_obj._distance / 12 * i));
+                    pointsY.push(startY - (_obj._distance / 12 * j));
                     pivot -= 1;
                 }
             }
 
-            var tweenObj = state.add.tween(floatingTextGroup).to({
+            tweenObj = state.add.tween(floatingTextGroup).to({
                 x: pointsX,
                 y: pointsY,
             }, _obj.timeToLive, Phaser.Easing.Circular.Out, true).interpolation(function(v, k) {
@@ -282,7 +293,7 @@ var FloatingText = function(state, options) {
                 }, this);
             }, floatingTextGroup);
         } else if (type === "up") {
-            var tweenObj = tweenProperty(floatingTextGroup, "y", {
+            tweenObj = tweenProperty(floatingTextGroup, "y", {
                 y: floatingTextGroup.y - _obj._distance
             }, 400, 100, _obj._easing);
 
@@ -298,7 +309,7 @@ var FloatingText = function(state, options) {
                 }, this);
             }, floatingTextGroup);
         } else if (type === "down") {
-            var tweenObj = tweenProperty(floatingTextGroup, "y", {
+            tweenObj = tweenProperty(floatingTextGroup, "y", {
                 y: floatingTextGroup.y + _obj._distance
             }, 400, 100, _obj._easing);
 
@@ -312,7 +323,7 @@ var FloatingText = function(state, options) {
                 }, this);
             }, floatingTextGroup);
         } else if (type === "left") {
-            var tweenObj = tweenProperty(floatingTextGroup, "y", {
+            tweenObj = tweenProperty(floatingTextGroup, "y", {
                 y: floatingTextGroup.x - _obj._distance
             }, 400, 100, _obj._easing);
 
@@ -326,7 +337,7 @@ var FloatingText = function(state, options) {
                 }, this);
             }, floatingTextGroup);
         } else if (type === "right") {
-            var tweenObj = tweenProperty(floatingTextGroup, "y", {
+            tweenObj = tweenProperty(floatingTextGroup, "y", {
                 y: floatingTextGroup + _obj._distance
             }, 400, 100, _obj._easing);
 
@@ -341,7 +352,7 @@ var FloatingText = function(state, options) {
             }, floatingTextGroup);
         } else if (type === "fade") {
             floatingTextGroup.alpha = 0;
-            var tweenObj = tweenProperty(floatingTextGroup, "alpha", {
+            tweenObj = tweenProperty(floatingTextGroup, "alpha", {
                 alpha: 1
             }, 250, 50, _obj._easing);
 
@@ -358,11 +369,11 @@ var FloatingText = function(state, options) {
     }
 
     function createPool() {
-    	var numOfItems = options.numOfItems || 50;
-    	mainFloatingTextPool = state.add.group();
-    	for(var i=0;i<numOfItems;i++) {
-    		mainFloatingTextPool.add(createFloatingText(true));
-    	}
+        var numOfItems = options.numOfItems || 50;
+        mainFloatingTextPool = state.add.group();
+        for (var i = 0; i < numOfItems; i++) {
+            mainFloatingTextPool.add(createFloatingText(true));
+        }
     }
 
     /**
@@ -385,12 +396,11 @@ var FloatingText = function(state, options) {
         return tween;
     }
 
-    if(options.numOfItems !== undefined){
-    	createPool();
+    if (options.numOfItems !== undefined) {
+        createPool();
+    } else {
+        createFloatingText();
     }
-    else {
-    	createFloatingText();
-	}
 
     // TODO: add factory
 
@@ -402,5 +412,5 @@ var FloatingText = function(state, options) {
             floatingTextGroup.visible = false;
         }
 
-    }
+    };
 };
