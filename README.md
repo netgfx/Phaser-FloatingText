@@ -2,6 +2,8 @@
 # Phaser-FloatingText
 A floating text effect UI component for Phaser.io Javascript library
 
+## New Phaser Floating text v3 plugin! [grab it here](https://github.com/netgfx/FloatingNumbersPlugin)
+
 <h3>Run the floating text effect from anywhere</h3>
 
 ```javascript
